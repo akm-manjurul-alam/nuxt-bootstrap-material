@@ -1,0 +1,7 @@
+{
+  "title": "Static Website Style Guide",
+  "description": "Components for Static Website build with Nuxt.js, Bootstrap 4 and Material kit",
+  "themeColor": "#fff",
+  "image": "/logo.png",
+  "baseUrl": "http://localhost:3000"
+}
