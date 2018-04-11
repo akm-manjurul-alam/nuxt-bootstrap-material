@@ -8,6 +8,14 @@ const title = config.get('title');
 const description = config.get('description');
 const image = config.get('image');
 const manifest = config.get('manifest');
+const fs = require('fs-extra');
+const bPath = path.join(__dirname, '/vendors/bootstrap-vue');
+
+// copy bootstrap in vendors for include individual components
+fs.copySync(
+  path.join(__dirname, '/node_modules/bootstrap-vue/es'), 
+  bPath
+)
 
 let link = [
   { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -55,8 +63,8 @@ module.exports = {
         config.plugins.push(
           new purgeCss({
             paths: glob.sync([
-              path.join(__dirname, './**/*.vue'),
-              path.join(__dirname, './bootstrap-vue/**/*.js')
+              path.join(__dirname, '**/*.vue'),
+              path.join(bPath, '**/*.js')
             ]),
             whitelist: ['html', 'body', '.nav-open', '#bodyClick']
           })
