@@ -3,5 +3,6 @@
   "description": "Components for Static Website build with Nuxt.js, Bootstrap 4 and Material kit",
   "themeColor": "#fff",
   "image": "/logo.png",
-  "baseUrl": "http://localhost:3000"
+  "baseUrl": "http://localhost:3000",
+  "apiBaseUrl": "http://localhost:8000"
 }

@@ -48,13 +48,15 @@ module.exports = {
   loading: false,
   env: {
     baseUrl: baseUrl,
+    apiBaseUrl: config.get('apiBaseUrl'),
   },
   css: [
     '~assets/scss/material-kit.scss'
   ],
   plugins: [
     '~plugins/head',
-    '~plugins/bootstrap'
+    '~plugins/bootstrap',
+    '~plugins/api',
   ],
   build: {
     extractCSS: true,

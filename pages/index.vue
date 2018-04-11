@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="section">
+      {{ login }} {{ test }}
     </div>
   </div>
 </template>
@@ -8,6 +9,16 @@
 <script>
   export default {
     layout: 'landing',
+    async asyncData ({ app  }) {
+      let { data } = await app.$api.get(`/login`)
+      console.log(data)
+      return data;
+    },
+    data() {
+      return {
+        test: 'toto'
+      }
+    }
   }
 </script>
 
