@@ -45,10 +45,8 @@ module.exports = {
     '~assets/scss/material-kit.scss'
   ],
   plugins: [
-    '~plugins/head'
-  ],
-  modules: [
-    ['bootstrap-vue/nuxt', { css: false }],
+    '~plugins/head',
+    '~plugins/bootstrap'
   ],
   build: {
     extractCSS: true,
@@ -57,9 +55,8 @@ module.exports = {
         config.plugins.push(
           new purgeCss({
             paths: glob.sync([
-              path.join(__dirname, './pages/**/*.vue'),
-              path.join(__dirname, './layouts/**/*.vue'),
-              path.join(__dirname, './components/**/*.vue')
+              path.join(__dirname, './**/*.vue'),
+              path.join(__dirname, './bootstrap-vue/**/*.js')
             ]),
             whitelist: ['html', 'body', '.nav-open', '#bodyClick']
           })

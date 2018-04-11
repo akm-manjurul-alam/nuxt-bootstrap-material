@@ -141,7 +141,7 @@
         height: 50px;
         font-size: $navbar-brand-font-size - 0.125;
         line-height: 30px;
-        padding: $padding-general-y $navbar-toggler-padding-x;
+        padding: $padding-general-y $padding-general-x $padding-general-y 0;
         margin-right: 0;
     }
 

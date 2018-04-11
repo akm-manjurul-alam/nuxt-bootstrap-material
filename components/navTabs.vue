@@ -1,18 +1,23 @@
 <template>
-<b-card no-body>
-  <b-tabs card>
-    <b-tab title="Tab 1" active>
-      Tab Contents 1
-    </b-tab>
-    <b-tab title="Tab 2">
-      Tab Contents 2
-    </b-tab>
-  </b-tabs>
-</b-card>
+  <b-card no-body class="card-nav-tabs">
+    <b-tabs card>
+      <b-tab active>
+        <template slot="title">
+          <i class="material-icons">face</i> Profile
+          <span class="ripple-container"></span>
+        </template>
+        Profile Contents
+      </b-tab>
+      <b-tab>
+        <template slot="title">
+          <i class="material-icons">chat</i> Messages
+          <span class="ripple-container"></span>
+        </template>
+        Messages Contents
+      </b-tab>
+    </b-tabs>
+  </b-card>
 </template>
-
-<script>
-</script>
 
 <style>
   .card-header {
