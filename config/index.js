@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-let file = path.join(__dirname, 'config' + process.env.NODE_ENV);
+let file = path.join(__dirname, process.env.NODE_ENV + '.json');
 
 if (!fs.existsSync(file)) {
-  file = path.join(__dirname, 'config/default.json');
+  file = path.join(__dirname, 'default.json');
 }
 
 const data = JSON.parse(fs.readFileSync(file, 'utf-8'));
