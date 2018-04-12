@@ -1,14 +1,17 @@
 const purgeCss = require('purgecss-webpack-plugin');
 const glob = require('glob-all');
+const fs = require('fs-extra');
 const path = require('path');
+
 const config = require('./config');
+
 const baseUrl = config.get('baseUrl');
 const themeColor = config.get('themeColor');
 const title = config.get('title');
 const description = config.get('description');
 const image = config.get('image');
 const manifest = config.get('manifest');
-const fs = require('fs-extra');
+
 const bPath = path.join(__dirname, '/vendors/bootstrap-vue');
 
 // copy bootstrap in vendors for include individual components

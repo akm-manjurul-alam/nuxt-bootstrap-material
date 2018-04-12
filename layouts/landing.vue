@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h1 class="h1 title">Style Guide</h1>
+            <h1 class="h1 title">Nuxt.js Style Guide</h1>
             <p>
               Components for Static Website build with Nuxt.js, Bootstrap 4 and Material kit.
             </p>
@@ -36,6 +36,13 @@
 
   .page-header {
     background-image: url('/bg.jpg');
+  }
+
+  .page-header .title {
+    font-size: 3rem;
+    @media (min-width: 768px) {
+      font-size: 5rem;
+    }
   }
 
   .page-header p {
