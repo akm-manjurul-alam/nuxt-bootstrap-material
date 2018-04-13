@@ -17,12 +17,12 @@
 </template>
 
 <script>
-  import AppNavTabs from '~/components/navTabs.vue'
-  export default {
-    components: {
-      AppNavTabs
-    },
-  }
+import AppTabs from '~/components/tabs'
+export default {
+  components: {
+    AppTabs
+  },
+}
 </script>
 
 

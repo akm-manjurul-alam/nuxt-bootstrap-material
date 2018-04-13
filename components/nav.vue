@@ -69,8 +69,8 @@
 
 <script>
 
-const fixed = null;
 const transparent = true;
+const fixed = 'top';
 
 function toggle(value) {
   if (value) {
@@ -107,8 +107,14 @@ export default {
     }
   },
   props: {
-    'transparent': transparent,
-    'fixed': fixed
+    transparent: {
+      type: Boolean,
+      default: transparent
+    },
+    fixed: {
+      type: String,
+      default: 'top'
+    }
   }
 }
 
