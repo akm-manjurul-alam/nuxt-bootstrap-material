@@ -1,4 +1,5 @@
 const purgeCss = require('purgecss-webpack-plugin');
+const purgeCssWhiteLister = require('purgecss-whitelister');
 const glob = require('glob-all');
 const fs = require('fs-extra');
 const path = require('path');
@@ -30,6 +31,11 @@ if (manifest) {
   link.push({ rel: 'manifest', href: manifest });
 }
 
+const codemirrorCss = [
+  './node_modules/codemirror/lib/codemirror.css',
+  './node_modules/codemirror/theme/monokai.css',
+];
+
 module.exports = {
   head: {
     title: title,
@@ -51,25 +57,31 @@ module.exports = {
   loading: false,
   env: {
     baseUrl: baseUrl,
+    components: require('./components')
   },
-  css: [
-    '~assets/scss/material-kit.scss'
-  ],
+  css: codemirrorCss.concat([
+    '~assets/scss/material-kit.scss',
+  ]),
   plugins: [
     '~plugins/head',
-    '~plugins/bootstrap'
+    '~plugins/bootstrap',
+    { src: '~plugins/codemirror', ssr: false },
   ],
   build: {
     extractCSS: true,
     extend (config, { isDev, isClient }) {
+      config.resolve.alias.vue = 'vue/dist/vue.js'
       if (!isDev) {
+
+        const whitelist = purgeCssWhiteLister(codemirrorCss);
+
         config.plugins.push(
           new purgeCss({
             paths: glob.sync([
               path.join(__dirname, '**/*.vue'),
               path.join(bPath, '**/*.js')
             ]),
-            whitelist: ['html', 'body', '.nav-open', '#bodyClick']
+            whitelist: whitelist.concat(['html', 'body', '.nav-open', '#bodyClick'])
           })
         )
       } else if (isClient) {

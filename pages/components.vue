@@ -2,14 +2,14 @@
   <div class="container">
     <div class="section">
       <div class="row">
-        <div class="col-md-8 text-center">
-          <h1 class="h2">Components</h1>
+        <div class="col-md-12">
+          <h1 class="h2">Tabs</h1>
+          <a href="https://bootstrap-vue.js.org/docs/components/tabs" target="_blank" rel="noopener">Bootstrap Vue Docs</a>
         </div>
         <div class="col-md-12">
-          <h2 class="h3">Tabs</h2>
-        </div>
-        <div class="col-md-12">
-          <app-nav-tabs/>
+          <app-component :component="components.cardTabs">
+            <app-card-tabs></app-card-tabs>
+          </app-component>
         </div>
       </div>
     </div>
@@ -17,11 +17,21 @@
 </template>
 
 <script>
-import AppTabs from '~/components/tabs'
+import AppComponent from '~/components/component'
+import AppCardTabs from '~/components/bootstrap/cardTabs'
+
+const components = process.env.components;
+
 export default {
   components: {
-    AppTabs
+    AppComponent,
+    AppCardTabs
   },
+  data() {
+    return {
+      components: components,
+    }
+  }
 }
 </script>
 
