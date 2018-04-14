@@ -108,7 +108,6 @@ export default {
   },
   mounted() {
     if (this.transparent) {
-      console.log('ok')
       window.addEventListener('scroll', function(e) {
         if ((window.pageYOffset || document.documentElement.scrollTop) > 20) {
           document.getElementById('navBar').classList.remove('navbar-transparent');
