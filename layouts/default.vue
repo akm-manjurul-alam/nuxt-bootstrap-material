@@ -18,6 +18,10 @@
 </script>
 
 <style>
+  .main {
+    padding-top: 70px;
+  }
+  
   .section {
     position: relative;
     top: -40px;

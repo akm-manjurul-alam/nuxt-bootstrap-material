@@ -80,16 +80,6 @@ function toggle(value) {
   }
 }
 
-if (process.browser && transparent) {
-  window.addEventListener('scroll', function(e) {
-    if ((window.pageYOffset || document.documentElement.scrollTop) > 20) {
-      document.getElementById('navBar').classList.remove('navbar-transparent');
-    } else {
-      document.getElementById('navBar').classList.add('navbar-transparent');
-    }
-  });
-}
-
 export default {
   methods: {
     toogle: () => {
@@ -114,6 +104,18 @@ export default {
     fixed: {
       type: String,
       default: 'top'
+    }
+  },
+  mounted() {
+    if (this.transparent) {
+      console.log('ok')
+      window.addEventListener('scroll', function(e) {
+        if ((window.pageYOffset || document.documentElement.scrollTop) > 20) {
+          document.getElementById('navBar').classList.remove('navbar-transparent');
+        } else {
+          document.getElementById('navBar').classList.add('navbar-transparent');
+        }
+      });
     }
   }
 }
