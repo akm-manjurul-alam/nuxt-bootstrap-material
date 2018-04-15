@@ -7,9 +7,7 @@
           <a href="https://bootstrap-vue.js.org/docs/components/tabs" target="_blank" rel="noopener">Bootstrap Vue Docs</a>
         </div>
         <div class="col-md-12">
-          <app-component :component="components.cardTabs">
-            <app-card-tabs></app-card-tabs>
-          </app-component>
+          <app-component :component="components.cardTabs"></app-component>
         </div>
       </div>
     </div>

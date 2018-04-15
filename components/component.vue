@@ -5,16 +5,15 @@
       <button v-on:click="showCode = !showCode" type="button" class="btn btn-success btn-sm">
         <i class="material-icons">code</i>
       </button>
-      <button v-on:click="refresh" type="button" class="btn btn-success btn-sm">
+      <button v-on:click="init" type="button" class="btn btn-success btn-sm">
         <i class="material-icons">refresh</i>
       </button>
     </h2>
-    <div id="component">
-      <slot></slot>
-    </div>
     <div v-if="showCode">
       <codemirror v-model="component.code" @input="onChange"></codemirror>
+      <hr>
     </div>
+    <div id="component"></div>
   </div>
 </template>
 
@@ -22,18 +21,20 @@
 
   import Vue from 'vue'
 
-  let cheerio;
+  let cheerio, babel
 
   if (process.browser) {
     cheerio = require('cheerio')
+    babel = require('babel-standalone')
   }
 
   export default {
     data() {
       return {
-        style: null,
         cheerio: cheerio,
+        babel: babel,
         showCode: false,
+        elStyle: null,
       }
     },
     props: {
@@ -49,35 +50,60 @@
       }
     },
     methods: {
-      refresh() {
-        this.set(this.code);
-        this.component.code = this.code;
+      init() {
+        this.set(this.code)
+        this.component.code = this.code
       },
       onChange(code) {
         this.set(code)
       },
       set(code) {
 
-        const content = this.cheerio.load(code);
-        const html = content('template').html() || '';
+        const content = this.cheerio.load(code)
 
-        new Vue({
-          el: '#component',
-          template: `<div id="component">${html.replace(/=""/g, '')}</div>`,
-        })
+        const template = content('template').html() || ''
+        const script = content('script').html()
+        const style = content('style').html()
 
-        if (!this.style) {
-          const head = document.head || document.getElementsByTagName('head')[0];
-          this.style = document.createElement('style');
-          this.style.type = 'text/css';
-          head.appendChild(this.style);
+        let data = {}
+
+        if (typeof script === 'string') {
+          try {
+            let js = babel.transform(script, { presets: ['es2015'] }).code
+            const exports = {}
+            data = eval(js)
+          } catch(e) {}
         }
 
-        this.style.innerHTML = content('style').html();
+        if (template !== this.template || script !== this.script) {
+
+          this.template = template
+          this.script = script
+
+          new Vue({
+            el: '#component',
+            template: `<div id="component"><div id="content"></div></div>`,
+          })
+
+          new Vue(Object.assign({
+            el: '#content',
+            template: template.replace(/=""/g, ''),
+          }, data))
+        }
+
+        if (!this.elStyle) {
+          const head = document.head || document.getElementsByTagName('head')[0]
+          this.elStyle = document.createElement('style')
+          this.elStyle.type = 'text/css'
+          head.appendChild(this.elStyle)
+        }
+        
+        this.elStyle.innerHTML = style
       }
     },
     mounted() {
-      this.code = this.component.code;
+      this.code = this.component.code
+      this.init()
     }
   }
 </script>
