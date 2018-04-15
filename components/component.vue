@@ -2,10 +2,10 @@
   <div>
     <h2 class="h3">
       {{ component.name }}
-      <button v-on:click="showCode = !showCode" type="button" class="btn btn-success btn-sm">
+      <button v-on:click="showCode = !showCode" type="button" class="btn btn-primary btn-sm">
         <i class="material-icons">code</i>
       </button>
-      <button v-on:click="init" type="button" class="btn btn-success btn-sm">
+      <button v-on:click="init" type="button" class="btn btn-warning btn-sm">
         <i class="material-icons">refresh</i>
       </button>
     </h2>

@@ -6,8 +6,8 @@
           <h1 class="h2">Tabs</h1>
           <a href="https://bootstrap-vue.js.org/docs/components/tabs" target="_blank" rel="noopener">Bootstrap Vue Docs</a>
         </div>
-        <div class="col-md-12">
-          <app-component :component="components.cardTabs"></app-component>
+        <div class="col-md-6">
+          <app-component :component="cardTabs"></app-component>
         </div>
       </div>
     </div>
@@ -16,19 +16,15 @@
 
 <script>
 import AppComponent from '~/components/component'
-import AppCardTabs from '~/components/bootstrap/cardTabs'
 
 const components = process.env.components;
 
 export default {
   components: {
     AppComponent,
-    AppCardTabs
   },
   data() {
-    return {
-      components: components,
-    }
+    return components
   }
 }
 </script>
