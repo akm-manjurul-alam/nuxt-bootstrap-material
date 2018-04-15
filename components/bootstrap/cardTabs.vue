@@ -20,7 +20,7 @@
 </template>
 
 <style>
-.card-header {
+.card .card-header {
   background: linear-gradient(60deg, #4CAF50, #8BC34A);
 }
 </style>

@@ -35,6 +35,7 @@
   $linear-gradient: 135deg,rgba(3, 169, 244, 0.9),rgba(33, 150, 243, 0.45);
 
   .page-header {
+    height: 80vh;
     background-image: url('/bg.jpg');
   }
 
@@ -58,12 +59,6 @@
     background: -webkit-linear-gradient($linear-gradient);
   }
 
-  .section {
-    position: relative;
-    top: -40px;
-    padding: 40px 0 0;
-    margin: 0;
-  }
   .section {
     position: relative;
     top: -40px;
