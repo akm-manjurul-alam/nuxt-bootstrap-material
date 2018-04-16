@@ -11,12 +11,13 @@ function getComponents(dir = './components/bootstrap', data = {}) {
       return getComponents(sourcePath, data);
     }
     const content = cheerio.load(fs.readFileSync(sourcePath, 'utf8'));
+    const name = content('name').text();
+    content('name').remove();
     data[source.replace('.vue', '')] = {
-      name: content('name').text(),
-      code: cheerio.html(content('template')).replace(/=""/g, '') + (content('style') ? "\n\n" + cheerio.html(content('style')) : ''),
+      name: name,
+      code: content('head').html().replace(/=""/g, ''),
     }
   });
-
   return data;
 }
 
