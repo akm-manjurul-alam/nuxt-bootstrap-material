@@ -25,38 +25,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              Lien 2
+            <a class="nav-link" href="/tools">
+              Tools
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              Lien 3
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Lien 4
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link--text-mobile" href="#">
-              <i class="material-icons">email</i> 
-              <span class="nav-text">Contact</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link--text-mobile" href="#">
-              <i class="material-icons">place</i> 
-              <span class="nav-text">Adresse</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link--text-mobile" href="https://www.facebook.com/solutionsweb.pro/" target="_blank" rel="noopener">
-              <svg class="material-icons svg-icons" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M18,5H15.5A3.5,3.5 0 0,0 12,8.5V11H10V14H12V21H15V14H18V11H15V9A1,1 0 0,1 16,8H18V5Z"/>
-              </svg>
-              <span class="nav-text">Facebook</span>
+            <a class="nav-link" href="https://github.com/mons54/nuxt-bootstrap-material-kit">
+              GitHub
             </a>
           </li>
         </ul>
