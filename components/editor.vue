@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="codemirror">
+    <div v-if="show">
       <codemirror v-model="model" @input="onChange"></codemirror>
       <hr>
     </div>
@@ -10,96 +10,116 @@
 
 <script>
 
-  import Vue from 'vue'
+import Vue from 'vue'
 
-  let cheerio, babel
-
-  if (process.browser) {
-    cheerio = require('cheerio')
-    babel = require('babel-standalone')
-  }
-
-  export default {
-    data() {
+export default {
+  data() {
+    return {
+      parser: this.cheerio,
+      compiler: this.babel,
+      show: false,
+      model: null,
+      elStyle: null,
+    }
+  },
+  props: {
+    cheerio: {
+      type: Function,
+      default: null,
+    },
+    babel: {
+      type: Function,
+      default: null,
+    },
+    code: {
+      type: String,
+      default: null,
+      require: true,
+    },
+    showCode: {
+      type: Boolean,
+      default: false
+    }, 
+  },
+  methods: {
+    init(code) {
+      this.model = code;
+      this.set(code)
+    },
+    onChange(code) {
+      this.set(code)
+    },
+    parse(code) {
+      const content = this.parser.load(code)
+      const template = content('template').html() || ''
+      const script = content('script').html()
+      const style = content('style').html()
       return {
-        cheerio: cheerio,
-        babel: babel,
-        codemirror: false,
-        model: null,
-        elStyle: null,
+        template,
+        script,
+        style
       }
     },
-    props: {
-      code: {
-        type: String,
-        default: null,
-        require: true,
-      },
-      showCode: {
-        type: Boolean,
-        default: false
-      }, 
+    compile(script) {
+      return this.compiler.transform(script, { presets: ['es2015'] }).code;
     },
-    methods: {
-      init(code) {
-        this.model = code;
-        this.set(code)
-      },
-      onChange(code) {
-        this.set(code)
-      },
-      set(code) {
+    set(code) {
 
-        const content = this.cheerio.load(code)
+      const content = this.parse(code)
+      const template = content.template
+      const script = content.script
+      const style = content.style
 
-        const template = content('template').html() || ''
-        const script = content('script').html()
-        const style = content('style').html()
+      let data = {}
 
-        let data = {}
-
-        if (typeof script === 'string') {
-          try {
-            let js = babel.transform(script, { presets: ['es2015'] }).code
-            const exports = {}
-            data = eval(js)
-          } catch(e) {}
-        }
-
-        if (template !== this.template || script !== this.script) {
-
-          this.template = template
-          this.script = script
-
-          new Vue({
-            el: '#component',
-            template: `<div id="component"><div id="content"></div></div>`,
-          })
-
-          new Vue(Object.assign({
-            el: '#content',
-            template: template.replace(/=""/g, ''),
-          }, data))
-        }
-
-        if (!this.elStyle) {
-          const head = document.head || document.getElementsByTagName('head')[0]
-          this.elStyle = document.createElement('style')
-          this.elStyle.type = 'text/css'
-          head.appendChild(this.elStyle)
-        }
-        
-        this.elStyle.innerHTML = style
+      if (typeof script === 'string') {
+        try {
+          let js = this.compile(script)
+          const exports = {}
+          data = eval(js)
+        } catch(e) {}
       }
-    },
-    mounted() {
-      this.codemirror = this.showCode;
-      this.init(this.code);
-    },
-    watch: {
-      showCode (value) {
-        this.codemirror = value;
+
+      if (template !== this.template || script !== this.script) {
+
+        this.template = template
+        this.script = script
+
+        new Vue({
+          el: '#component',
+          template: `<div id="component"><div id="content"></div></div>`,
+        })
+
+        new Vue(Object.assign({
+          el: '#content',
+          template: template.replace(/=""/g, ''),
+        }, data))
       }
-    },
-  }
+
+      if (!this.elStyle) {
+        const head = document.head || document.getElementsByTagName('head')[0]
+        this.elStyle = document.createElement('style')
+        this.elStyle.type = 'text/css'
+        head.appendChild(this.elStyle)
+      }
+      
+      this.elStyle.innerHTML = style
+    }
+  },
+  mounted() {
+    if (!this.parser) {
+      this.parser = require('cheerio')
+    }
+    if (!this.compiler) {
+      this.compiler = require('babel-standalone')
+    }
+    this.show = this.showCode;
+    this.init(this.code);
+  },
+  watch: {
+    showCode (value) {
+      this.show = value;
+    }
+  },
+}
 </script>

@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-12">
           <h2 class="h3">Editor</h2>
-          <app-editor :code="code" :show-code="true"></app-editor>
+          <live-preview :code="code" :show-code="true"></live-preview>
         </div>
       </div>
     </div>
@@ -15,14 +15,11 @@
 </template>
 
 <script>
-import AppEditor from '~/components/editor'
+
 
 const code = process.env.components.example.code;
 
 export default {
-  components: {
-    AppEditor,
-  },
   data() {
     return {
       code: code

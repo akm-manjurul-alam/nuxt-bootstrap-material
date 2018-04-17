@@ -24,7 +24,7 @@ if (manifest) {
 
 const codemirrorCss = [
   './node_modules/codemirror/lib/codemirror.css',
-  './node_modules/codemirror/theme/monokai.css',
+  './node_modules/codemirror/theme/material.css',
 ];
 
 module.exports = {
@@ -44,6 +44,7 @@ module.exports = {
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
     ],
     link: link,
+    //script: [{ src: '//unpkg.com/vue-live-preview@latest/dist/vue-live-preview.min.js' }],
   },
   loading: false,
   env: {
@@ -56,7 +57,7 @@ module.exports = {
   plugins: [
     '~plugins/head',
     { src: '~plugins/bootstrap', ssr: false },
-    { src: '~plugins/codemirror', ssr: false },
+    { src: '~plugins/preview', ssr: false },
   ],
   build: {
     extractCSS: true,
