@@ -1,7 +1,6 @@
 const purgeCss = require('purgecss-webpack-plugin');
 const purgeCssWhiteLister = require('purgecss-whitelister');
 const glob = require('glob-all');
-const fs = require('fs-extra');
 const path = require('path');
 
 const config = require('./config');
@@ -12,14 +11,6 @@ const title = config.get('title');
 const description = config.get('description');
 const image = config.get('image');
 const manifest = config.get('manifest');
-
-const bPath = path.join(__dirname, '/vendors/bootstrap-vue');
-
-// copy bootstrap in vendors for include individual components
-fs.copySync(
-  path.join(__dirname, '/node_modules/bootstrap-vue/es'), 
-  bPath
-)
 
 let link = [
   { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -64,7 +55,7 @@ module.exports = {
   ]),
   plugins: [
     '~plugins/head',
-    '~plugins/bootstrap',
+    { src: '~plugins/bootstrap', ssr: false },
     { src: '~plugins/codemirror', ssr: false },
   ],
   build: {
@@ -79,7 +70,7 @@ module.exports = {
           new purgeCss({
             paths: glob.sync([
               path.join(__dirname, '**/*.vue'),
-              path.join(bPath, '**/*.js')
+              path.join(__dirname, 'node_modules/bootstrap-vue/es/components', '**/*.js')
             ]),
             whitelist: whitelist.concat(['html', 'body', '.nav-open', '#bodyClick'])
           })
