@@ -8,7 +8,7 @@
         <div class="col-md-12">
           <h2 class="h3">Editor</h2>
           <no-ssr>
-            <live-preview :code="code"/>
+            <live-preview :code="code" />
           </no-ssr>
         </div>
       </div>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
   const code = process.env.components.example.code;
 
   export default {

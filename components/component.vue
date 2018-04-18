@@ -5,7 +5,7 @@
     <button v-on:click="showCode = !showCode" type="button" class="btn btn-primary btn-sm">
       <i class="material-icons">code</i>
     </button>
-    <button v-on:click="refresh" type="button" class="btn btn-warning btn-sm">
+    <button v-on:click="reset" type="button" class="btn btn-warning btn-sm">
       <i class="material-icons">refresh</i>
     </button>
   </h2>
@@ -36,7 +36,7 @@
       },
     },
     methods: {
-      refresh() {
+      reset() {
         this.$refs.editor.init(this.component.code);
       },
     },
