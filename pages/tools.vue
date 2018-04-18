@@ -7,7 +7,9 @@
         </div>
         <div class="col-md-12">
           <h2 class="h3">Editor</h2>
-          <live-preview :code="code" :show-code="true"></live-preview>
+          <no-ssr>
+            <live-preview :code="code"/>
+          </no-ssr>
         </div>
       </div>
     </div>
@@ -15,15 +17,13 @@
 </template>
 
 <script>
+  const code = process.env.components.example.code;
 
-
-const code = process.env.components.example.code;
-
-export default {
-  data() {
-    return {
-      code: code
+  export default {
+    data() {
+      return {
+        code: code
+      }
     }
   }
-}
 </script>

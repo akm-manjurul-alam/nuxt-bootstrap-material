@@ -9,18 +9,14 @@
       <i class="material-icons">refresh</i>
     </button>
   </h2>
-  <app-editor :code="component.code" :show-code="showCode" ref="editor"></app-editor>
+  <no-ssr>
+    <live-preview :code="component.code" :show-code="showCode" ref="editor"/>
+  </no-ssr>
 </div>
 </template>
 
 <script>
-
-  import AppEditor from '~/components/editor'
-
   export default {
-    components: {
-      AppEditor,
-    },
     data() {
       return {
         showCode: false,
