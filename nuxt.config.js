@@ -44,7 +44,6 @@ module.exports = {
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
     ],
     link: link,
-    //script: [{ src: '//unpkg.com/vue-live-preview@latest/dist/vue-live-preview.min.js' }],
   },
   loading: false,
   env: {
