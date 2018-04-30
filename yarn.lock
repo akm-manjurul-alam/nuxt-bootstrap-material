@@ -6545,9 +6545,9 @@ vue-hot-reload-api@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"
 
-vue-live-preview@0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/vue-live-preview/-/vue-live-preview-0.3.3.tgz#91aa7cea09d4a613460421298d38ca448444541a"
+vue-live-preview@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/vue-live-preview/-/vue-live-preview-0.4.1.tgz#de9b97fea87132499013431e8c3669da6d615b05"
   dependencies:
     babel-standalone "^6.26.0"
     vue-codemirror "^4.0.4"
